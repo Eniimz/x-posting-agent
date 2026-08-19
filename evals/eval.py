@@ -9,11 +9,11 @@ from prompts import get_critic_messages
 AGREEMENT_FLOOR = 0.70
 
 
-def run_critic_replay(labels, runs, patterns) -> tuple[int, int]:
+def run_critic_replay(labels, patterns) -> tuple[int, int]:
     structured = llm.with_structured_output(Critic)
     agree = total = 0
 
-    for row, run in zip(labels, runs, strict=True):
+    for row in labels:
         if row.get("fail_list_passed") is None:
             continue
         total += 1
@@ -60,11 +60,9 @@ def main() -> None:
         patterns = json.load(f)["patterns"]
     with open("eval_labels.json") as f:
         labels = json.load(f)
-    with open("eval_runs.json") as f:
-        runs = json.load(f)
 
     print("--- critic replay ---")
-    agree, critic_total = run_critic_replay(labels, runs, patterns)
+    agree, critic_total = run_critic_replay(labels, patterns)
     rate = agree / critic_total if critic_total else 0
 
     print("\n--- code graders ---")
