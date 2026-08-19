@@ -1,7 +1,9 @@
+PYTHON ?= .venv/bin/python
+
 .PHONY: eval graders
 
 eval:
-	PYTHONPATH=agent:. .venv/bin/python evals/eval.py
+	PYTHONPATH=agent:. $(PYTHON) evals/eval.py
 
 graders:
-	PYTHONPATH=agent:. .venv/bin/python evals/graders.py
+	PYTHONPATH=agent:. $(PYTHON) evals/graders.py

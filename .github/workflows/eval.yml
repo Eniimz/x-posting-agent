@@ -22,4 +22,4 @@ jobs:
       - name: Run eval suite  # agreement floor 70%
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        run: make eval
+        run: make eval PYTHON=python
