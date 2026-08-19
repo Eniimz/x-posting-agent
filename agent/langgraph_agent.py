@@ -39,7 +39,6 @@ if fail -> write it again (back to write_post)
 
 
 llm = init_chat_model("gpt-4o")
-tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
 PAST_POSTS_FILE = str(_ROOT / "past_posts_log.json")
 EVAL_RUNS_FILE = str(_ROOT / "eval_runs.json")
@@ -126,6 +125,7 @@ def discover(state: State):
     """Search the web for candidate stories inside the niche. No LLM — just retrieval."""
     _ = state
     print("discovering stories...")
+    tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
     with open(_DIR / "niche.yml", "r") as f:
         niche_raw = f.read()
@@ -202,6 +202,7 @@ def research(state: State):
 
     # pull fuller context than the discovery snippet
     context = story.get("content", "")
+    tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
     try:
         deep = tavily.search(query=story["title"], max_results=3, include_raw_content=False)
         context += "\n\n" + "\n\n".join(
