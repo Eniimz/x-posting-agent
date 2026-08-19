@@ -1,0 +1,35 @@
+# What this account posts about. Set once, edit whenever.
+
+audience: >
+  Founders and product engineers building products on top of AI agents.
+  They care about what works in front of real users, what breaks, what
+  costs money, and what changes how they'd build. They are not reading
+  papers — they are shipping.
+
+angle: >
+  Product-first. Take a technical story and say what it MEANS for someone
+  building a product: what problem it solves for users, what it changes
+  about the build/buy decision, what it costs, what breaks. Implementation
+  detail only when it's the reason the product outcome changed.
+
+topics:
+  - AI agents in production, and what actually breaks with real users
+  - what agent memory/context limits mean for product decisions
+  - cost and latency tradeoffs teams hit when shipping agents
+  - build vs buy for agent infrastructure
+  - evals — knowing whether your agent is actually working
+  - voice AI products and where they fall over
+
+discovery_queries:
+  - "AI agent product launch users"
+  - "AI agent startup production lessons"
+  - "LLM agent cost latency production"
+  - "AI agent evals reliability shipping"
+  - "voice AI product real users"
+
+avoid:
+  - funding announcements with no product substance
+  - generic "AI will change everything" takes
+  - vendor marketing posts
+  - deep implementation detail with no product consequence
+  - academic paper summaries that don't change how you'd build

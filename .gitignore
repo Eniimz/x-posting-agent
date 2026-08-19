@@ -1,0 +1,11 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+eval_runs.json
+eval_labels.json
+eval_replay.json
+past_posts_log.json
+structure_cache.json
+my_profile.txt
+past_posts_log.json.bak

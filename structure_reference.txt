@@ -1,0 +1,147 @@
+## @adxtyahq
+
+One thing I've noticed while using AI coding agents is that every new session starts the same way. The agent re-greps the repo, re-reads the same files and rebuilds context it already understood yesterday. You're paying in both tokens and time just to get back where you left off
+
+---
+
+FINALLY UNINSTALLED VSCODE AFTER A YEAR OF NOT OPENING IT
+
+---
+
+Really cool to see what the Atomic Agent team has built. A fully local AI agent running via llama.cpp, supporting Qwen, Gemma, and Llama, with TurboQuant reducing KV cache usage by 6.4x. According to their benchmarks, it achieved 37/53 on GAIA Level 1 compared to Hermes' 31/53 using the same local model and setup. Open source keeps raising the bar
+
+---
+
+Tried recreating Fall Guys using a single prompt with Grok 4.6 (Grok CLI) and Kimi K3 (Kimi CLI). Kimi K3 produced a more polished UI, while Grok 4.6 had decent visuals but weaker game mechanics. Kimi handled both the UI and mechanics better overall with the exact same prompt.
+
+---
+
+after spending a few hours with SAM 3, my mental model has completely changed. i'm starting to think of it less as "segment this image" and more as retrieval for pixels. instead of sending an entire screenshot to an LLM, you first extract the relevant objects like buttons, players, backgrounds, HUD elements, enemies, etc., then pass only the structured information the model actually needs. feels a lot like what RAG did for text, but applied to visual understanding
+
+---
+
+read Lilian Weng's "Harness Engineering for Self-Improvement" a few days ago and couldn't stop thinking about it. ended up writing this deep dive on context engineering, covering ACE, MCE, and Meta-Harness, and how they gradually shift more decision-making from humans to the system
+
+---
+
+I've been working on some pretty fun engineering problems lately, and I've realized I enjoy performance engineering a lot more than I expected. Over the past few weeks I reworked a big part of a asset pipeline to make uploads significantly faster without changing any user-facing features.
+
+Some of the things I worked on:
+1. Added content-based deduplication using SHA-256 hashes so identical assets are detected before upload and duplicate uploads are skipped entirely
+2. Parallelized storage uploads and database writes to reduce overall upload latency
+3. Implemented optimistic uploads so assets appear instantly while processing and uploads continue in the background
+4. Moved thumbnail generation and asset registration off the critical path into background jobs
+5. Added cleanup logic for partial failures to keep storage and database state consistent
+6. Switched to content-addressed asset keys to eliminate unnecessary uploads and reduce storage overhead
+
+The more I work on systems like this, the more I appreciate the engineering that users never notice until it's missing.
+
+---
+
+i remember working on a product where our AI bill was around $900-950 per engineer every month. that's probably why i'm so bullish on cost optimization right now. feels like we've moved past tokenmaxxing and into figuring out how to get the same output for a fraction of the cost. really enjoyed Arvind's perspective on where AI infrastructure is heading
+
+---
+
+One thing I've noticed is that AI agents are becoming victims of their own success. Every new MCP, skill and tool makes them more capable, but also gives them more context to read before they can do any useful work. I think context engineering is becoming just as important as prompt engineering, and Ratel is a great example of that by loading only the tools a task actually needs
+
+---
+
+$830M from BlackRock, Google, Jane Street and Situational Awareness. I've believed for a while that the next AI bottleneck wouldn't be models, it'd be compute infrastructure. Hard not to see where the industry is headed after this
+
+## @Av1dlive
+
+anthropic engineer thariq shihipar, on stage the day fable 5 dropped:
+
+"we recently removed 80% of the system prompt for claude code."
+
+in 19 minutes proved the biggest tip of prompt engineering entirely wrong
+
+no secret tool. no hidden tier.
+
+[so what exactly did they cut?]
+
+the last thing you'd guess.
+
+the examples.
+
+[the #1 prompting tip everyone teaches was wrong]
+
+give it examples was constraining the model. fable is more imaginative than the examples you feed it.
+
+watch the talk. then read the guide below.
+
+bookmark this.
+
+[7 tips Anthropic Engineers use to Prompt Claude]
+
+1/ delete before you write
+
+anthropic runs different system prompts per model now. frontier models get the lean prompt: the full 80% cut. older models keep the original.
+
+what they removed: examples, because the model outperforms them. and "do not do this" rules, because hard constraints confuse the model when they collide with user instructions later.
+
+their test for every line: is this 100% true? an instruction that's 90% right ships 100% of the time the other 10% becomes confusion. soften it until it's always true, or delete it.
+
+2/ rebuild the loop for multiday runs
+
+single turns run for minutes. autonomous runs stretch to days. official recommendation: check on runs through scheduled jobs, not blocking calls.
+
+supervision becomes cron, not await.
+
+3/ hide the token counter
+
+show fable a remaining-context countdown and it starts suggesting new sessions and trimming its own work.
+
+keep operator dashboards out of model context. observability is for you, not the model.
+
+4/ make it prove progress
+
+instruct the model to verify every progress claim against an actual tool result before reporting it. anthropic says this nearly eliminated fabricated status updates in their testing even on tasks designed to bait them.
+
+5/ build a verbatim channel
+
+tool inputs are never summarized. a simple client-side display tool becomes word-for-word delivery from a mid-run agent. catch: define the tool and the model rarely calls it. you need elicitation language in the system prompt too.
+
+6/ audit for the reasoning landmine
+
+old skills that say "explain your reasoning in your response" can now trigger the reasoning_extraction refusal. with fallback configured, those requests quietly route to opus 4.8.
+
+find these instructions before production does.
+
+7/ route by effort, not by model
+
+low effort on fable 5 often beats xhigh on the previous generation. the routing decision moved from "which model" to "which effort level."
+
+and prompts fork by model tier too: lean for frontier, full for older. one prompt for all models is over.
+
+bookmark this before your team migrates. full playbook in the article below.
+
+---
+
+holy sh*t this is f**king gold
+
+an AI Engineer making $1,500,000 a year
+
+just sent me a "Graph Engineering Course" I've never seen on X.
+
+translated it to English and instantly understood why it has 4,400 stars on Github.
+
+[then he gave me the exact blueprint to master graph engineering:]
+
+9 steps: representation → ontology → entity extraction → relations → events → quality gate → fusion → embeddings → memory your agent can traverse
+
+I compressed his entire path into a skill. now it's:
+
+1. clone the repo "graph-engineering"
+2. hand the skill to Claude
+3. done and it teaches you the whole pipeline on your own project
+
+no PhD. no complex setup. save and bookmark this no matter what
+
+---
+
+Andrew Ng just dropped a free 1-hour course on building agentic knowledge graphs from scratch
+
+Watch it today, then read the article below on how to become a graph engineer.
+
+Save and bookmark this no matter what. It'll be the most productive thing you do this week
