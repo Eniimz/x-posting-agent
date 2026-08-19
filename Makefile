@@ -1,7 +1,7 @@
 .PHONY: eval graders
 
 eval:
-	PYTHONPATH=. .venv/bin/python evals/eval.py
+	PYTHONPATH=agent:. .venv/bin/python evals/eval.py
 
 graders:
-	PYTHONPATH=. .venv/bin/python evals/graders.py
+	PYTHONPATH=agent:. .venv/bin/python evals/graders.py

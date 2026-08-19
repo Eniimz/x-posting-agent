@@ -56,7 +56,7 @@ def run_code_graders(labels) -> tuple[int, int]:
 
 
 def main() -> None:
-    with open("patterns.json") as f:
+    with open("agent/patterns.json") as f:
         patterns = json.load(f)["patterns"]
     with open("eval_labels.json") as f:
         labels = json.load(f)

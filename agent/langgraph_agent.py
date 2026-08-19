@@ -2,6 +2,7 @@ import difflib
 import json
 import os
 from datetime import datetime
+from pathlib import Path
 
 import yaml
 from tavily import TavilyClient
@@ -25,6 +26,8 @@ from prompts import (
 
 _ = load_dotenv()
 
+_DIR = Path(__file__).parent   # agent/
+_ROOT = _DIR.parent             # repo root
 
 """
 order flow:
@@ -38,8 +41,8 @@ if fail -> write it again (back to write_post)
 llm = init_chat_model("gpt-4o")
 tavily = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 
-PAST_POSTS_FILE = "past_posts_log.json"
-EVAL_RUNS_FILE = "eval_runs.json"
+PAST_POSTS_FILE = str(_ROOT / "past_posts_log.json")
+EVAL_RUNS_FILE = str(_ROOT / "eval_runs.json")
 
 
 class Post(BaseModel):
@@ -84,7 +87,7 @@ class State(TypedDict):
 def fetch_my_profile(state: State):
     _ = state  # required by LangGraph node signature; unused for now
     print("Fetching your posts...")
-    with open("my_profile.txt", "r") as f:
+    with open(_ROOT / "my_profile.txt", "r") as f:
         content = f.read()
 
     return {"my_profile": content}
@@ -94,7 +97,7 @@ def fetch_patterns(state: State):
     _ = state
     print("loading pattern library")
 
-    with open("patterns.json", "r") as f:
+    with open(_DIR / "patterns.json", "r") as f:
         data = json.load(f)
 
     return {"patterns": data["patterns"]}
@@ -124,7 +127,7 @@ def discover(state: State):
     _ = state
     print("discovering stories...")
 
-    with open("niche.yml", "r") as f:
+    with open(_DIR / "niche.yml", "r") as f:
         niche_raw = f.read()
     niche_cfg = yaml.safe_load(niche_raw)
 

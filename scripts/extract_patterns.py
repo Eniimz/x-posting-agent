@@ -30,7 +30,7 @@ class PatternLibrary(BaseModel):
 
 
 def extract_patterns():
-    with open("structure_reference.txt", "r") as f:
+    with open("agent/structure_reference.txt", "r") as f:
         reference_posts = f.read()
 
     system = """You catalog real X (Twitter) posts written by engineers with strong followings. These are the voice being copied — direct, concrete, unpolished. The opposite of LinkedIn-style corporate writing.
@@ -53,7 +53,7 @@ Posts are separated by '---' and grouped under account headers like '## @usernam
 
     assert isinstance(result, PatternLibrary)
 
-    with open("patterns.json", "w") as f:
+    with open("agent/patterns.json", "w") as f:
         json.dump(result.model_dump(), f, indent=2)
 
     print(f"Cataloged {len(result.patterns)} posts:")
